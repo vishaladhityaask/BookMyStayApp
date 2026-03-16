@@ -1,3 +1,9 @@
+<<<<<<< HEAD
+=======
+import java.util.HashMap;
+import java.util.Map;
+
+>>>>>>> UC4
 abstract class Room {
 
     protected String roomType;
@@ -12,6 +18,13 @@ abstract class Room {
         this.price = price;
     }
 
+<<<<<<< HEAD
+=======
+    public String getRoomType() {
+        return roomType;
+    }
+
+>>>>>>> UC4
     public void displayRoom() {
         System.out.println(roomType + ":");
         System.out.println("Beds: " + beds);
@@ -21,24 +34,43 @@ abstract class Room {
 }
 
 class SingleRoom extends Room {
+<<<<<<< HEAD
     public SingleRoom() {
         super("Single Room", 1, 250, 1500.0);
+=======
+
+    public SingleRoom() {
+        super("Single", 1, 250, 1500.0);
+>>>>>>> UC4
     }
 }
 
 class DoubleRoom extends Room {
+<<<<<<< HEAD
     public DoubleRoom() {
         super("Double Room", 2, 400, 2500.0);
+=======
+
+    public DoubleRoom() {
+        super("Double", 2, 400, 2500.0);
+>>>>>>> UC4
     }
 }
 
 class SuiteRoom extends Room {
+<<<<<<< HEAD
     public SuiteRoom() {
         super("Suite Room", 3, 750, 5000.0);
+=======
+
+    public SuiteRoom() {
+        super("Suite", 3, 750, 5000.0);
+>>>>>>> UC4
     }
 }
 
 
+<<<<<<< HEAD
 class BookMyStayApp {
     public static void main(String[] args) {
 
@@ -60,5 +92,81 @@ class BookMyStayApp {
 
         suite.displayRoom();
         System.out.println("Available: " + suiteAvailable);
+=======
+class RoomInventory {
+
+    private Map<String, Integer> roomAvailability;
+
+    public RoomInventory() {
+        roomAvailability = new HashMap<>();
+    }
+
+    public void registerRoom(String type, int count) {
+        roomAvailability.put(type, count);
+    }
+
+    public Map<String, Integer> getRoomAvailability() {
+        return roomAvailability;
+    }
+}
+
+class RoomSearchService {
+
+    public void searchAvailableRooms(
+            RoomInventory inventory,
+            Room singleRoom,
+            Room doubleRoom,
+            Room suiteRoom) {
+
+        Map<String, Integer> availability = inventory.getRoomAvailability();
+
+        if (availability.get("Single") > 0) {
+
+            singleRoom.displayRoom();
+            System.out.println("Available: " + availability.get("Single"));
+            System.out.println();
+        }
+
+        if (availability.get("Double") > 0) {
+
+            doubleRoom.displayRoom();
+            System.out.println("Available: " + availability.get("Double"));
+            System.out.println();
+        }
+
+        if (availability.get("Suite") > 0) {
+
+            suiteRoom.displayRoom();
+            System.out.println("Available: " + availability.get("Suite"));
+            System.out.println();
+        }
+    }
+}
+
+class BookMyStayApp {
+
+    public static void main(String[] args) {
+
+        Room singleRoom = new SingleRoom();
+        Room doubleRoom = new DoubleRoom();
+        Room suiteRoom = new SuiteRoom();
+
+        RoomInventory inventory = new RoomInventory();
+
+        inventory.registerRoom("Single", 5);
+        inventory.registerRoom("Double", 3);
+        inventory.registerRoom("Suite", 3);
+
+        RoomSearchService searchService = new RoomSearchService();
+
+        System.out.println("Room Search\n");
+
+        searchService.searchAvailableRooms(
+                inventory,
+                singleRoom,
+                doubleRoom,
+                suiteRoom
+        );
+>>>>>>> UC4
     }
 }
